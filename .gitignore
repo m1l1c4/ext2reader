@@ -1,0 +1,10 @@
+# Object files
+*.o
+
+# Compiled binaries
+ext2reader
+
+# Other build artifacts
+*.a
+*.so
+*.out
