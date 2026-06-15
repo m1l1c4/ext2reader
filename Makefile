@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -Wall -g
 
 TARGET = ext2_reader
-SRCS = main.cpp superblock.cpp diskReader.cpp blockgroup.cpp inode.cpp directory.cpp
+SRCS = main.cpp superblock.cpp diskReader.cpp blockgroup.cpp inode.cpp directory.cpp html.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 $(TARGET): $(OBJS)

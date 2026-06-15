@@ -4,6 +4,7 @@
 #include "blockgroup.hpp"
 #include "inode.hpp"
 #include "directory.hpp"
+#include "html.hpp"
 
 
 using namespace std;
@@ -82,6 +83,11 @@ int main() {
     cout << "--- Root directory / ---" << endl;
     read_directory(img, root_inode, bg, sb, 0);
     
+    //********************************************************** */
+    //HTML GENERATION
+    cout << "\n*** HTML GENERATION ***" << endl;
+    generate_html(img, sb, bg, num_groups);
+    //********************************************************** */
 
 
     img.close();
