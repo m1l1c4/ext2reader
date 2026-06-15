@@ -8,4 +8,4 @@ ext2reader
 *.a
 *.so
 *.out
-output/
+output/*
