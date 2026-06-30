@@ -5,6 +5,8 @@
 #include "diskReader.hpp"
 
 struct BlockGroup {
+    uint32_t block_bitmap;      // block where block bitmap is stored
+    uint32_t inode_bitmap;      // block where inode bitmap is stored
     uint32_t inode_table;       // block where inode table starts ← most important!
     uint16_t free_blocks_count; // free blocks in this group
     uint16_t free_inodes_count; // free inodes in this group

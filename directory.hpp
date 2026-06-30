@@ -21,10 +21,7 @@ struct DirEntry {
     std::string name;       // filename
 };
 
-void read_directory(std::ifstream& img, Inode& dir_inode,
-                    BlockGroup* bg, Superblock& sb,
-                    int depth);
-
+void read_directory(std::ifstream& img, Inode& dir_inode, BlockGroup* bg, Superblock& sb, int depth);
 DirEntry parse_direntry(char* buffer);
 void print_direntry(DirEntry& entry);
 

@@ -27,7 +27,7 @@ wiki ext2 https://en.wikipedia.org/wiki/Ext2
 struct Superblock {
     uint32_t inodes_count;      // total number of inodes
     uint32_t blocks_count;      // total number of blocks
-    uint32_t first_data_block;  // ← add this back!
+    uint32_t first_data_block;  // first block with the data 
     uint32_t log_block_size;    // block size (as power of 2)
     uint32_t blocks_per_group;  // blocks per group
     uint32_t inodes_per_group;  // inodes per group
@@ -35,6 +35,7 @@ struct Superblock {
     uint16_t state;             // filesystem state
     uint32_t rev_level;         // revision level    
     uint16_t inode_size;        // size of each inode structure
+    uint32_t first_ino;         // first non-reserved inode
     uint32_t block_size;        // calculated, not from disk
 };
 

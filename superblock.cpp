@@ -15,15 +15,14 @@ Superblock parse_superblock(char* buffer) {
     sb.magic             = read2(buffer, 56);
     sb.state             = read2(buffer, 58);
     sb.rev_level        = read4(buffer, 76);
-    // in revision 1+ inode size is read from superblock
-    if (sb.rev_level == 0) {
-        sb.inode_size = 128;  // EXT2_GOOD_OLD_INODE_SIZE
-    } else {
-        sb.inode_size = read2(buffer, 88);
-    }
-    // calculate actual block size from log value
-    // in revision 0 inode size field does not exist, it is always 128
 
+    if (sb.rev_level == 0) sb.first_ino = 11;   // EXT2_GOOD_OLD_FIRST_INO
+    else sb.first_ino = read4(buffer, 84);
+
+    if (sb.rev_level == 0) sb.inode_size = 128; // in revision 0 inode size field does not exist, it is always 128
+    else sb.inode_size = read2(buffer, 88);     //in revision 1+ inode size is read from superblock
+
+    // calculate actual block size from log value
     sb.block_size = 1024 << sb.log_block_size;  //min possible block is 1kB
 
     return sb;
@@ -40,5 +39,6 @@ void print_superblock(Superblock& sb) {
     cout << "Inodes/group:  " << sb.inodes_per_group << endl;
     cout << "Revision:      " << sb.rev_level << endl;
     cout << "Inode size:    " << sb.inode_size << " bytes" << endl;
+    cout << "First inode:   " << sb.first_ino << endl;
     cout << "State:         " << sb.state << endl;
 }

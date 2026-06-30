@@ -67,8 +67,13 @@ void read_directory(std::ifstream& img, Inode& dir_inode,
                 entry.name != "..") {
 
                 // read the subdirectory inode
-                uint32_t sub_inode_offset = bg[0].inode_table * sb.block_size + 
-                                           (entry.inode - 1) * sb.inode_size;
+                uint32_t inode_index = entry.inode - 1;               // 0-based global index
+                uint32_t group_index = inode_index / sb.inodes_per_group;  // which group
+                uint32_t local_index = inode_index % sb.inodes_per_group;  // position within group
+
+                uint32_t sub_inode_offset = bg[group_index].inode_table * sb.block_size + 
+                                        local_index * sb.inode_size;
+
                 char sub_inode_buffer[sb.inode_size];
                 read_bytes(img, sub_inode_buffer, sub_inode_offset, sb.inode_size);
                 Inode sub_inode = parse_inode(sub_inode_buffer);
